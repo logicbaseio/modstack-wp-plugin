@@ -1,0 +1,571 @@
+/**
+ * ModStack Admin Styles
+ * Styles for the WordPress admin interface
+ */
+
+/* Admin Container Layout */
+.modstack-admin-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.modstack-admin-main {
+    flex: 2;
+    min-width: 0;
+}
+
+.modstack-admin-sidebar {
+    flex: 1;
+    min-width: 300px;
+}
+
+.modstack-admin-sidebar .postbox {
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+.modstack-admin-container .form-table th {
+    width: 200px;
+    padding: 15px 10px 15px 0;
+    vertical-align: top;
+}
+
+.modstack-admin-container .form-table td {
+    padding: 15px 10px;
+    vertical-align: top;
+}
+
+.modstack-admin-container .regular-text {
+    width: 100%;
+    max-width: 400px;
+}
+
+.modstack-admin-container input[type="text"],
+.modstack-admin-container input[type="password"],
+.modstack-admin-container input[type="url"],
+.modstack-admin-container select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.modstack-admin-container input[type="text"]:focus,
+.modstack-admin-container input[type="password"]:focus,
+.modstack-admin-container input[type="url"]:focus,
+.modstack-admin-container select:focus {
+    border-color: #007cba;
+    box-shadow: 0 0 0 1px #007cba;
+    outline: none;
+}
+
+.modstack-admin-container input.invalid {
+    border-color: #dc3232;
+    box-shadow: 0 0 0 1px #dc3232;
+}
+
+/* Connection Status */
+#connection-status {
+    margin-left: 10px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+#connection-status.success {
+    color: #46b450;
+}
+
+#connection-status.error {
+    color: #dc3232;
+}
+
+/* Loading Spinner */
+.modstack-loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #007cba;
+    border-radius: 50%;
+    animation: modstack-admin-spin 1s linear infinite;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+@keyframes modstack-admin-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.modstack-loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: #666;
+    font-size: 14px;
+}
+
+.modstack-loading-container .modstack-loading {
+    margin-right: 10px;
+    margin-left: 0;
+}
+
+/* Buttons */
+.modstack-admin-container .button {
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.modstack-admin-container .button:last-child {
+    margin-right: 0;
+}
+
+.modstack-admin-container .button-primary {
+    background: #007cba;
+    border-color: #007cba;
+    color: #fff;
+}
+
+.modstack-admin-container .button-primary:hover {
+    background: #005a87;
+    border-color: #005a87;
+}
+
+.modstack-admin-container .button-secondary {
+    background: #f7f7f7;
+    border-color: #ccc;
+    color: #555;
+}
+
+.modstack-admin-container .button-secondary:hover {
+    background: #fafafa;
+    border-color: #999;
+}
+
+/* Sidebar Styling */
+.modstack-admin-sidebar .postbox-header h2 {
+    font-size: 16px;
+    margin: 0;
+    padding: 12px;
+}
+
+.modstack-admin-sidebar .inside {
+    padding: 12px;
+    margin: 0;
+}
+
+.modstack-admin-sidebar .inside h4 {
+    margin: 16px 0 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.modstack-admin-sidebar .inside h4:first-child {
+    margin-top: 0;
+}
+
+.modstack-admin-sidebar .inside code {
+    background: #f1f1f1;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    display: inline-block;
+    margin: 4px 0;
+    word-break: break-all;
+}
+
+.modstack-admin-sidebar .inside p.description {
+    font-size: 12px;
+    color: #666;
+    margin: 4px 0 0 0;
+    line-height: 1.4;
+}
+
+.modstack-admin-sidebar .inside ol {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.modstack-admin-sidebar .inside ol li {
+    margin-bottom: 8px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.modstack-admin-sidebar .inside ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.modstack-admin-sidebar .inside ul li {
+    margin-bottom: 4px;
+    font-size: 13px;
+}
+
+.modstack-admin-sidebar .inside a {
+    color: #007cba;
+    text-decoration: none;
+}
+
+.modstack-admin-sidebar .inside a:hover {
+    color: #005a87;
+    text-decoration: underline;
+}
+
+/* Chatbots Grid */
+.modstack-chatbots-grid,
+.modstack-forms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.modstack-chatbot-card,
+.modstack-form-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease;
+}
+
+.modstack-chatbot-card:hover,
+.modstack-form-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.chatbot-header,
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.chatbot-header h3,
+.form-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #23282d;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.chatbot-status,
+.form-status {
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-active {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-inactive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.status-draft {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.chatbot-content,
+.form-content {
+    margin-bottom: 16px;
+}
+
+.chatbot-description,
+.form-description {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0 0 12px 0;
+}
+
+.chatbot-meta,
+.form-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.chatbot-id,
+.chatbot-created,
+.form-id,
+.form-fields {
+    font-size: 12px;
+    color: #999;
+}
+
+.chatbot-actions,
+.form-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.chatbot-actions .button,
+.form-actions .button {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .modstack-admin-container {
+        flex-direction: column;
+    }
+    
+    .modstack-admin-sidebar {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .modstack-chatbots-grid,
+    .modstack-forms-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modstack-admin-container .form-table th,
+    .modstack-admin-container .form-table td {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+    
+    .modstack-admin-container .form-table th {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    
+    .modstack-admin-container .regular-text {
+        max-width: 100%;
+    }
+    
+    .chatbot-actions,
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .chatbot-actions .button,
+    .form-actions .button {
+        flex: none;
+    }
+}
+
+/* Notices */
+.modstack-admin-container .notice {
+    margin: 20px 0;
+    padding: 12px;
+    border-left: 4px solid;
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.modstack-admin-container .notice-success {
+    border-left-color: #46b450;
+}
+
+.modstack-admin-container .notice-error {
+    border-left-color: #dc3232;
+}
+
+.modstack-admin-container .notice-warning {
+    border-left-color: #ffb900;
+}
+
+.modstack-admin-container .notice-info {
+    border-left-color: #00a0d2;
+}
+
+.modstack-admin-container .notice p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.modstack-admin-container .notice a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.modstack-admin-container .notice a:hover {
+    text-decoration: none;
+}
+
+/* Empty States */
+.modstack-empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+}
+
+.modstack-empty-state h3 {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    color: #23282d;
+}
+
+.modstack-empty-state p {
+    margin: 0 0 20px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.modstack-empty-state .button {
+    margin: 0;
+}
+
+/* Tooltips */
+.modstack-tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+
+.modstack-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #23282d;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 1000;
+    margin-bottom: 5px;
+}
+
+.modstack-tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #23282d;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.modstack-tooltip:hover::after,
+.modstack-tooltip:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Copy to clipboard animation */
+.copy-shortcode.copied {
+    background: #46b450 !important;
+    border-color: #46b450 !important;
+    color: #fff !important;
+}
+
+/* Admin menu icon */
+.toplevel_page_modstack-settings .wp-menu-image img {
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+}
+
+.toplevel_page_modstack-settings:hover .wp-menu-image img,
+.toplevel_page_modstack-settings.current .wp-menu-image img {
+    opacity: 1;
+}
+
+/* Settings sections */
+.modstack-settings-section {
+    margin-bottom: 30px;
+}
+
+.modstack-settings-section h3 {
+    margin: 0 0 15px 0;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #23282d;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
+/* API key field styling */
+.modstack-api-key-field {
+    position: relative;
+    display: inline-block;
+}
+
+.modstack-api-key-field input {
+    padding-right: 80px;
+}
+
+.modstack-api-key-field .button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 4px 8px;
+    font-size: 11px;
+    height: auto;
+    line-height: 1;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .modstack-chatbot-card,
+    .modstack-form-card {
+        background: #1e1e1e;
+        border-color: #444;
+        color: #fff;
+    }
+    
+    .chatbot-header h3,
+    .form-header h3 {
+        color: #fff;
+    }
+    
+    .chatbot-description,
+    .form-description {
+        color: #ccc;
+    }
+}
+
+/* Print styles */
+@media print {
+    .modstack-admin-sidebar,
+    .chatbot-actions,
+    .form-actions,
+    .button {
+        display: none;
+    }
+    
+    .modstack-admin-main {
+        flex: 1;
+    }
+}
