@@ -153,7 +153,9 @@ if (strpos($api_key, 'modstack_') === 0) {
     if (!preg_match('/^modstack_wp_[a-f0-9]{32}$/', $api_key)) {
         wp_send_json_error(__('Invalid ModStack API key format.', 'modstack-ai-support'));
     }
-} else {
+} 
+
+else {
     // JWT format validation (should have 3 parts separated by dots)
     $jwt_parts = explode('.', $api_key);
     if (count($jwt_parts) !== 3) {
