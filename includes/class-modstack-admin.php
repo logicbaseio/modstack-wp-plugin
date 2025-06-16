@@ -140,11 +140,17 @@ class ModStack_Admin {
     public function test_api_connection() {
         check_ajax_referer('modstack_nonce', 'nonce');
         
-        $api_key = sanitize_text_field($_POST['api_key']);
+        $api_key = trim(sanitize_text_field($_POST['api_key']));
         $api_url = esc_url_raw($_POST['api_url']);
         
         if (empty($api_key) || empty($api_url)) {
             wp_send_json_error(__('API key and URL are required', 'modstack-ai-support'));
+        }
+        
+        // Basic JWT format validation (should have 3 parts separated by dots)
+        $jwt_parts = explode('.', $api_key);
+        if (count($jwt_parts) !== 3) {
+            wp_send_json_error(__('Invalid API key format. Expected JWT token with 3 parts.', 'modstack-ai-support'));
         }
         
         $response = wp_remote_get($api_url . '/api/v1/modbots', array(
@@ -171,7 +177,19 @@ class ModStack_Admin {
         } else {
             $error_data = json_decode($body, true);
             $error_message = $error_data['message'] ?? 'Authentication failed. Please check your API key.';
-            wp_send_json_error(__($error_message, 'modstack-ai-support'));
+            
+            // Add debug information for development
+            $debug_info = array(
+                'status_code' => $status_code,
+                'response_body' => $body,
+                'api_url' => $api_url . '/api/v1/modbots',
+                'api_key_length' => strlen($api_key)
+            );
+            
+            wp_send_json_error(array(
+                'message' => __($error_message, 'modstack-ai-support'),
+                'debug' => $debug_info
+            ));
         }
     }
     

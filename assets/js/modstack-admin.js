@@ -166,14 +166,25 @@
                 },
                 error: function(xhr, status, error) {
                     let errorMessage = config.strings.connection_failed || 'Connection failed';
+                    let debugInfo = '';
                     
                     if (status === 'timeout') {
                         errorMessage = config.strings.connection_timeout || 'Connection timeout';
+                    } else if (xhr.responseJSON && xhr.responseJSON.data) {
+                        if (typeof xhr.responseJSON.data === 'string') {
+                            errorMessage = xhr.responseJSON.data;
+                        } else if (xhr.responseJSON.data.message) {
+                            errorMessage = xhr.responseJSON.data.message;
+                            if (xhr.responseJSON.data.debug) {
+                                debugInfo = ' (Status: ' + xhr.responseJSON.data.debug.status_code + ')';
+                                console.log('ModStack API Debug Info:', xhr.responseJSON.data.debug);
+                            }
+                        }
                     } else if (xhr.responseJSON && xhr.responseJSON.message) {
                         errorMessage = xhr.responseJSON.message;
                     }
                     
-                    $('#connection-status').removeClass('success').addClass('error').text(errorMessage);
+                    $('#connection-status').removeClass('success').addClass('error').text(errorMessage + debugInfo);
                 },
                 complete: function() {
                     utils.hideLoading(button);
