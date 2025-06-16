@@ -149,8 +149,8 @@ class ModStack_Admin {
         
         // Validate API key format - accept both ModStack custom format and JWT format
 if (strpos($api_key, 'modstack_') === 0) {
-    // ModStack custom format: modstack_wp_[32-character hash]
-    if (!preg_match('/^modstack_wp_[a-f0-9]{32}$/', $api_key)) {
+    // ModStack custom format: modstack_wp_[64-character hash]
+    if (!preg_match('/^modstack_wp_[a-f0-9]{64}$/', $api_key)) {
         wp_send_json_error(__('Invalid ModStack API key format.', 'modstack-ai-support'));
     }
 } 
