@@ -16,27 +16,27 @@ class ModStack_Shortcodes {
      * Constructor
      */
     public function __construct() {
-        add_shortcode('modstack-chatbot', array($this, 'chatbot_shortcode'));
+        add_shortcode('modstack-modbot', array($this, 'modbot_shortcode'));
         add_shortcode('modstack-ticket-form', array($this, 'ticket_form_shortcode'));
         add_shortcode('modstack-widget', array($this, 'widget_shortcode'));
     }
     
     /**
-     * Chatbot shortcode
-     * Usage: [modstack-chatbot id="123" theme="light" height="500px"]
+     * Modbot shortcode
+     * Usage: [modstack-modbot id="123" theme="light" height="500px"]
      */
-    public function chatbot_shortcode($atts) {
+    public function modbot_shortcode($atts) {
         $atts = shortcode_atts(array(
             'id' => '',
             'theme' => 'light',
             'height' => '500px',
             'width' => '100%',
-            'title' => 'ModStack Chatbot'
-        ), $atts, 'modstack-chatbot');
+            'title' => 'ModStack Modbot'
+        ), $atts, 'modstack-modbot');
         
         // Validate required attributes
         if (empty($atts['id'])) {
-            return '<div class="modstack-error">' . __('Chatbot ID is required', 'modstack-ai-support') . '</div>';
+            return '<div class="modstack-error">' . __('Modbot ID is required', 'modstack-ai-support') . '</div>';
         }
         
         // Check if API is configured
@@ -46,10 +46,10 @@ class ModStack_Shortcodes {
         }
         
         // Generate unique container ID
-        $container_id = 'modstack-chatbot-' . uniqid();
+        $container_id = 'modstack-modbot-' . uniqid();
         
         // Sanitize attributes
-        $chatbot_id = sanitize_text_field($atts['id']);
+        $modbot_id = sanitize_text_field($atts['id']);
         $theme = sanitize_text_field($atts['theme']);
         $height = sanitize_text_field($atts['height']);
         $width = sanitize_text_field($atts['width']);
@@ -58,12 +58,12 @@ class ModStack_Shortcodes {
         // Build the HTML
         ob_start();
         ?>
-        <div id="<?php echo esc_attr($container_id); ?>" class="modstack-chatbot-container" 
+        <div id="<?php echo esc_attr($container_id); ?>" class="modstack-modbot-container" 
              style="width: <?php echo esc_attr($width); ?>; height: <?php echo esc_attr($height); ?>; border: 1px solid #e1e5e9; border-radius: 8px; overflow: hidden;">
             <div class="modstack-loading" style="display: flex; align-items: center; justify-content: center; height: 100%; background: #f8f9fa;">
                 <div style="text-align: center;">
                     <div class="modstack-spinner" style="border: 3px solid #f3f3f3; border-top: 3px solid #007cba; border-radius: 50%; width: 30px; height: 30px; animation: modstack-spin 1s linear infinite; margin: 0 auto 10px;"></div>
-                    <p style="margin: 0; color: #666;"><?php _e('Loading chatbot...', 'modstack-ai-support'); ?></p>
+                    <p style="margin: 0; color: #666;"><?php _e('Loading modbot...', 'modstack-ai-support'); ?></p>
                 </div>
             </div>
         </div>
@@ -87,22 +87,22 @@ class ModStack_Shortcodes {
         (function() {
             const container = document.getElementById('<?php echo esc_js($container_id); ?>');
             const apiUrl = '<?php echo esc_js(get_option('modstack_api_url', 'https://api.modstack.ai')); ?>';
-            const chatbotId = '<?php echo esc_js($chatbot_id); ?>';
+            const modbotId = '<?php echo esc_js($modbot_id); ?>';
             const theme = '<?php echo esc_js($theme); ?>';
             
-            // Initialize chatbot
-            if (typeof ModStackChatbot !== 'undefined') {
-                ModStackChatbot.init({
+            // Initialize modbot
+            if (typeof ModStackModbot !== 'undefined') {
+                ModStackModbot.init({
                     container: container,
-                    chatbotId: chatbotId,
+                    modbotId: modbotId,
                     apiUrl: apiUrl,
                     theme: theme,
                     title: '<?php echo esc_js($title); ?>'
                 });
             } else {
-                // Fallback: Load chatbot via iframe
+                // Fallback: Load modbot via iframe
                 const iframe = document.createElement('iframe');
-                iframe.src = apiUrl + '/embed/chatbot/' + chatbotId + '?theme=' + theme;
+                iframe.src = apiUrl + '/embed/modbot/' + chatbotId + '?theme=' + theme;
                 iframe.style.width = '100%';
                 iframe.style.height = '100%';
                 iframe.style.border = 'none';
@@ -209,7 +209,7 @@ class ModStack_Shortcodes {
         $atts = shortcode_atts(array(
             'position' => 'bottom-right',
             'theme' => 'light',
-            'chatbot_id' => ''
+            'modbot_id' => ''
         ), $atts, 'modstack-widget');
         
         // Check if API is configured
@@ -218,11 +218,11 @@ class ModStack_Shortcodes {
             return '<div class="modstack-error">' . __('ModStack API key not configured', 'modstack-ai-support') . '</div>';
         }
         
-        // Use provided chatbot_id or fall back to global setting
-        $chatbot_id = !empty($atts['chatbot_id']) ? sanitize_text_field($atts['chatbot_id']) : get_option('modstack_selected_chatbot', '');
+        // Use provided modbot_id or fall back to global setting
+        $modbot_id = !empty($atts['modbot_id']) ? sanitize_text_field($atts['modbot_id']) : get_option('modstack_selected_modbot', '');
         
-        if (empty($chatbot_id)) {
-            return '<div class="modstack-error">' . __('No chatbot configured for widget', 'modstack-ai-support') . '</div>';
+        if (empty($modbot_id)) {
+            return '<div class="modstack-error">' . __('No modbot configured for widget', 'modstack-ai-support') . '</div>';
         }
         
         // Generate unique widget ID
@@ -241,7 +241,7 @@ class ModStack_Shortcodes {
         (function() {
             const widget = document.getElementById('<?php echo esc_js($widget_id); ?>');
             const apiUrl = '<?php echo esc_js(get_option('modstack_api_url', 'https://api.modstack.ai')); ?>';
-            const chatbotId = '<?php echo esc_js($chatbot_id); ?>';
+            const modbotId = '<?php echo esc_js($modbot_id); ?>';
             const position = '<?php echo esc_js($position); ?>';
             const theme = '<?php echo esc_js($theme); ?>';
             
@@ -249,7 +249,7 @@ class ModStack_Shortcodes {
             if (typeof ModStackWidget !== 'undefined') {
                 ModStackWidget.init({
                     container: widget,
-                    chatbotId: chatbotId,
+                    modbotId: modbotId,
                     apiUrl: apiUrl,
                     position: position,
                     theme: theme

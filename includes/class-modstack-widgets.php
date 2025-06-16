@@ -23,25 +23,25 @@ class ModStack_Widgets {
      * Register widgets
      */
     public function register_widgets() {
-        register_widget('ModStack_Chatbot_Widget');
+        register_widget('ModStack_Modbot_Widget');
         register_widget('ModStack_Ticket_Form_Widget');
     }
 }
 
 /**
- * ModStack Chatbot Widget
+ * ModStack Modbot Widget
  */
-class ModStack_Chatbot_Widget extends WP_Widget {
+class ModStack_Modbot_Widget extends WP_Widget {
     
     /**
      * Constructor
      */
     public function __construct() {
         parent::__construct(
-            'modstack_chatbot_widget',
-            __('ModStack Chatbot', 'modstack-ai-support'),
+            'modstack_modbot_widget',
+            __('ModStack Modbot', 'modstack-ai-support'),
             array(
-                'description' => __('Display a ModStack chatbot in your sidebar or widget area', 'modstack-ai-support')
+                'description' => __('Display a ModStack modbot in your sidebar or widget area', 'modstack-ai-support')
             )
         );
     }
@@ -51,11 +51,11 @@ class ModStack_Chatbot_Widget extends WP_Widget {
      */
     public function widget($args, $instance) {
         $title = apply_filters('widget_title', $instance['title']);
-        $chatbot_id = $instance['chatbot_id'];
+        $modbot_id = $instance['modbot_id'];
         $theme = $instance['theme'] ?? 'light';
         $height = $instance['height'] ?? '400px';
         
-        if (empty($chatbot_id)) {
+        if (empty($modbot_id)) {
             return;
         }
         
@@ -65,8 +65,8 @@ class ModStack_Chatbot_Widget extends WP_Widget {
             echo $args['before_title'] . $title . $args['after_title'];
         }
         
-        // Use shortcode to render chatbot
-        echo do_shortcode('[modstack-chatbot id="' . esc_attr($chatbot_id) . '" theme="' . esc_attr($theme) . '" height="' . esc_attr($height) . '"]');
+        // Use shortcode to render modbot
+        echo do_shortcode('[modstack-modbot id="' . esc_attr($modbot_id) . '" theme="' . esc_attr($theme) . '" height="' . esc_attr($height) . '"]');
         
         echo $args['after_widget'];
     }
@@ -76,13 +76,13 @@ class ModStack_Chatbot_Widget extends WP_Widget {
      */
     public function form($instance) {
         $title = $instance['title'] ?? __('Chat with us', 'modstack-ai-support');
-        $chatbot_id = $instance['chatbot_id'] ?? '';
+        $modbot_id = $instance['modbot_id'] ?? '';
         $theme = $instance['theme'] ?? 'light';
         $height = $instance['height'] ?? '400px';
         
-        // Get available chatbots
+        // Get available modbots
         $api = new ModStack_API();
-        $chatbots = $api->get_chatbots();
+        $modbots = $api->get_modbots();
         
         ?>
         <p>
@@ -91,17 +91,17 @@ class ModStack_Chatbot_Widget extends WP_Widget {
         </p>
         
         <p>
-            <label for="<?php echo $this->get_field_id('chatbot_id'); ?>"><?php _e('Chatbot:', 'modstack-ai-support'); ?></label>
-            <select class="widefat" id="<?php echo $this->get_field_id('chatbot_id'); ?>" name="<?php echo $this->get_field_name('chatbot_id'); ?>">
-                <option value=""><?php _e('Select a chatbot', 'modstack-ai-support'); ?></option>
-                <?php if (!is_wp_error($chatbots) && is_array($chatbots)): ?>
-                    <?php foreach ($chatbots as $chatbot): ?>
-                        <option value="<?php echo esc_attr($chatbot['id']); ?>" <?php selected($chatbot_id, $chatbot['id']); ?>>
-                            <?php echo esc_html($chatbot['name']); ?>
+            <label for="<?php echo $this->get_field_id('modbot_id'); ?>"><?php _e('Modbot:', 'modstack-ai-support'); ?></label>
+            <select class="widefat" id="<?php echo $this->get_field_id('modbot_id'); ?>" name="<?php echo $this->get_field_name('modbot_id'); ?>">
+                <option value=""><?php _e('Select a modbot', 'modstack-ai-support'); ?></option>
+                <?php if (!is_wp_error($modbots) && is_array($modbots)): ?>
+                    <?php foreach ($modbots as $modbot): ?>
+                        <option value="<?php echo esc_attr($modbot['id']); ?>" <?php selected($modbot_id, $modbot['id']); ?>>
+                            <?php echo esc_html($modbot['name']); ?>
                         </option>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <option value="" disabled><?php _e('Unable to load chatbots', 'modstack-ai-support'); ?></option>
+                    <option value="" disabled><?php _e('Unable to load modbots', 'modstack-ai-support'); ?></option>
                 <?php endif; ?>
             </select>
         </p>
@@ -128,7 +128,7 @@ class ModStack_Chatbot_Widget extends WP_Widget {
     public function update($new_instance, $old_instance) {
         $instance = array();
         $instance['title'] = (!empty($new_instance['title'])) ? sanitize_text_field($new_instance['title']) : '';
-        $instance['chatbot_id'] = (!empty($new_instance['chatbot_id'])) ? sanitize_text_field($new_instance['chatbot_id']) : '';
+        $instance['modbot_id'] = (!empty($new_instance['modbot_id'])) ? sanitize_text_field($new_instance['modbot_id']) : '';
         $instance['theme'] = (!empty($new_instance['theme'])) ? sanitize_text_field($new_instance['theme']) : 'light';
         $instance['height'] = (!empty($new_instance['height'])) ? sanitize_text_field($new_instance['height']) : '400px';
         

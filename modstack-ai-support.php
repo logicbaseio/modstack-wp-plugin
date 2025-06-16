@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ModStack AI Support
  * Plugin URI: https://modstack.ai
- * Description: Integrate ModStack's AI-powered customer support system into your WordPress site with chatbots, ticket forms, and automated responses.
+ * Description: Integrate ModStack's AI-powered customer support system into your WordPress site with modbots, ticket forms, and automated responses.
  * Version: 1.0.0
  * Author: ModStack
  * Author URI: https://modstack.ai

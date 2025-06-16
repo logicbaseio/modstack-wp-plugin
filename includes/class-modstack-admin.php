@@ -19,7 +19,7 @@ class ModStack_Admin {
         add_action('admin_menu', array($this, 'add_admin_menu'));
         add_action('admin_init', array($this, 'register_settings'));
         add_action('wp_ajax_modstack_test_connection', array($this, 'test_api_connection'));
-        add_action('wp_ajax_modstack_get_chatbots', array($this, 'get_chatbots'));
+        add_action('wp_ajax_modstack_get_modbots', array($this, 'get_modbots'));
         add_action('wp_ajax_modstack_get_ticket_forms', array($this, 'get_ticket_forms'));
     }
     
@@ -48,11 +48,11 @@ class ModStack_Admin {
         
         add_submenu_page(
             'modstack-settings',
-            __('Chatbots', 'modstack-ai-support'),
-            __('Chatbots', 'modstack-ai-support'),
+            __('Modbots', 'modstack-ai-support'),
+            __('Modbots', 'modstack-ai-support'),
             'manage_options',
-            'modstack-chatbots',
-            array($this, 'chatbots_page')
+            'modstack-modbots',
+            array($this, 'modbots_page')
         );
         
         add_submenu_page(
@@ -73,7 +73,7 @@ class ModStack_Admin {
         register_setting('modstack_settings', 'modstack_api_url');
         register_setting('modstack_settings', 'modstack_widget_enabled');
         register_setting('modstack_settings', 'modstack_widget_position');
-        register_setting('modstack_settings', 'modstack_selected_chatbot');
+        register_setting('modstack_settings', 'modstack_selected_modbot');
         register_setting('modstack_settings', 'modstack_widget_theme');
     }
     
@@ -89,17 +89,17 @@ class ModStack_Admin {
         $api_url = get_option('modstack_api_url', 'https://api.modstack.ai');
         $widget_enabled = get_option('modstack_widget_enabled', false);
         $widget_position = get_option('modstack_widget_position', 'bottom-right');
-        $selected_chatbot = get_option('modstack_selected_chatbot', '');
+        $selected_modbot = get_option('modstack_selected_modbot', '');
         $widget_theme = get_option('modstack_widget_theme', 'light');
         
         include MODSTACK_PLUGIN_PATH . 'templates/admin-settings.php';
     }
     
     /**
-     * Chatbots page
+     * Modbots page
      */
-    public function chatbots_page() {
-        include MODSTACK_PLUGIN_PATH . 'templates/admin-chatbots.php';
+    public function modbots_page() {
+        include MODSTACK_PLUGIN_PATH . 'templates/admin-modbots.php';
     }
     
     /**
@@ -121,7 +121,7 @@ class ModStack_Admin {
         update_option('modstack_api_url', esc_url_raw($_POST['modstack_api_url']));
         update_option('modstack_widget_enabled', isset($_POST['modstack_widget_enabled']));
         update_option('modstack_widget_position', sanitize_text_field($_POST['modstack_widget_position']));
-        update_option('modstack_selected_chatbot', sanitize_text_field($_POST['modstack_selected_chatbot']));
+        update_option('modstack_selected_modbot', sanitize_text_field($_POST['modstack_selected_modbot']));
         update_option('modstack_widget_theme', sanitize_text_field($_POST['modstack_widget_theme']));
         
         add_action('admin_notices', array($this, 'settings_saved_notice'));
@@ -174,9 +174,9 @@ class ModStack_Admin {
     }
     
     /**
-     * Get chatbots via AJAX
+     * Get modbots via AJAX
      */
-    public function get_chatbots() {
+    public function get_modbots() {
         check_ajax_referer('modstack_nonce', 'nonce');
         
         $api_key = get_option('modstack_api_key', '');
@@ -186,7 +186,7 @@ class ModStack_Admin {
             wp_send_json_error(__('API key not configured', 'modstack-ai-support'));
         }
         
-        $response = wp_remote_get($api_url . '/api/v1/chatbots', array(
+        $response = wp_remote_get($api_url . '/api/v1/modbots', array(
             'headers' => array(
                 'Authorization' => 'Bearer ' . $api_key,
                 'Content-Type' => 'application/json'
@@ -195,7 +195,7 @@ class ModStack_Admin {
         ));
         
         if (is_wp_error($response)) {
-            wp_send_json_error(__('Failed to fetch chatbots: ', 'modstack-ai-support') . $response->get_error_message());
+            wp_send_json_error(__('Failed to fetch modbots: ', 'modstack-ai-support') . $response->get_error_message());
         }
         
         $status_code = wp_remote_retrieve_response_code($response);
@@ -205,7 +205,7 @@ class ModStack_Admin {
             $data = json_decode($body, true);
             wp_send_json_success($data);
         } else {
-            wp_send_json_error(__('Failed to fetch chatbots', 'modstack-ai-support'));
+            wp_send_json_error(__('Failed to fetch modbots', 'modstack-ai-support'));
         }
     }
     

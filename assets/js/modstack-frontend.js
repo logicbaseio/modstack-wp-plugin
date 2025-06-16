@@ -43,7 +43,7 @@
     class ModStackWidget {
         constructor(options) {
             this.options = {
-                chatbotId: '',
+                modbotId: '',
                 theme: 'light',
                 position: 'bottom-right',
                 height: '600px',
@@ -62,8 +62,8 @@
         }
         
         init() {
-            if (!this.options.chatbotId) {
-                utils.error('Chatbot ID is required');
+            if (!this.options.modbotId) {
+                utils.error('Modbot ID is required');
                 return;
             }
             
@@ -210,7 +210,7 @@
         
         buildIframeUrl() {
             const params = new URLSearchParams({
-                chatbot_id: this.options.chatbotId,
+                modbot_id: this.options.modbotId,
                 theme: this.options.theme,
                 embedded: 'true',
                 origin: window.location.origin
@@ -409,12 +409,12 @@
         }
     }
     
-    // Chatbot Embed class
-    class ModStackChatbot {
+    // Modbot Embed class
+    class ModStackModbot {
         constructor(element, options) {
             this.element = $(element);
             this.options = {
-                chatbotId: '',
+                modbotId: '',
                 theme: 'light',
                 height: '500px',
                 ...options
@@ -424,16 +424,16 @@
         }
         
         init() {
-            if (!this.options.chatbotId) {
-                utils.error('Chatbot ID is required');
+            if (!this.options.modbotId) {
+                utils.error('Modbot ID is required');
                 return;
             }
             
-            this.createChatbot();
-            utils.log('Chatbot embed initialized', this.options);
+            this.createModbot();
+            utils.log('Modbot embed initialized', this.options);
         }
         
-        createChatbot() {
+        createModbot() {
             const iframe = $('<iframe></iframe>')
                 .attr({
                     src: this.buildIframeUrl(),
@@ -452,7 +452,7 @@
         
         buildIframeUrl() {
             const params = new URLSearchParams({
-                chatbot_id: this.options.chatbotId,
+                modbot_id: this.options.modbotId,
                 theme: this.options.theme,
                 embedded: 'true',
                 origin: window.location.origin

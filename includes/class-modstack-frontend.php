@@ -26,9 +26,9 @@ class ModStack_Frontend {
      */
     public function render_global_widget() {
         $widget_enabled = get_option('modstack_widget_enabled', false);
-        $chatbot_id = get_option('modstack_selected_chatbot', '');
+        $modbot_id = get_option('modstack_selected_modbot', '');
         
-        if (!$widget_enabled || empty($chatbot_id)) {
+        if (!$widget_enabled || empty($modbot_id)) {
             return;
         }
         
@@ -47,7 +47,7 @@ class ModStack_Frontend {
         ?>
         <!-- ModStack Global Widget -->
         <div id="<?php echo esc_attr($widget_id); ?>" class="modstack-global-widget" 
-             data-chatbot-id="<?php echo esc_attr($chatbot_id); ?>"
+             data-modbot-id="<?php echo esc_attr($modbot_id); ?>"
              data-position="<?php echo esc_attr($position); ?>"
              data-theme="<?php echo esc_attr($theme); ?>"
              data-api-url="<?php echo esc_attr($api_url); ?>">
@@ -182,7 +182,7 @@ class ModStack_Frontend {
         <script>
         (function() {
             const widget = document.getElementById('<?php echo esc_js($widget_id); ?>');
-            const chatbotId = widget.dataset.chatbotId;
+            const modbotId = widget.dataset.modbotId;
             const apiUrl = widget.dataset.apiUrl;
             const theme = widget.dataset.theme;
             
@@ -211,8 +211,8 @@ class ModStack_Frontend {
             // Create iframe
             const iframe = document.createElement('iframe');
             iframe.className = 'modstack-widget-iframe';
-            iframe.src = apiUrl + '/embed/chatbot/' + chatbotId + '?theme=' + theme + '&widget=true';
-            iframe.title = '<?php echo esc_js(__('ModStack Chatbot', 'modstack-ai-support')); ?>';
+            iframe.src = apiUrl + '/embed/modbot/' + modbotId + '?theme=' + theme + '&widget=true';
+            iframe.title = '<?php echo esc_js(__('ModStack Modbot', 'modstack-ai-support')); ?>';
             
             // Assemble widget
             body.appendChild(iframe);
@@ -282,8 +282,8 @@ class ModStack_Frontend {
             return $content;
         }
         
-        $chatbot_id = get_option('modstack_selected_chatbot', '');
-        if (empty($chatbot_id)) {
+        $modbot_id = get_option('modstack_selected_modbot', '');
+        if (empty($modbot_id)) {
             return $content;
         }
         
@@ -300,7 +300,7 @@ class ModStack_Frontend {
     public static function get_widget_config() {
         return array(
             'api_url' => get_option('modstack_api_url', 'https://api.modstack.ai'),
-            'chatbot_id' => get_option('modstack_selected_chatbot', ''),
+            'modbot_id' => get_option('modstack_selected_modbot', ''),
             'widget_enabled' => get_option('modstack_widget_enabled', false),
             'widget_position' => get_option('modstack_widget_position', 'bottom-right'),
             'widget_theme' => get_option('modstack_widget_theme', 'light'),

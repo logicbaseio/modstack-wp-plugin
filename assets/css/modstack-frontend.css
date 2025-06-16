@@ -131,7 +131,7 @@
 }
 
 /* Shortcode Containers */
-.modstack-chatbot-shortcode,
+.modstack-modbot-shortcode,
 .modstack-ticket-form-shortcode {
     width: 100%;
     margin: 20px 0;
@@ -140,7 +140,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.modstack-chatbot-shortcode iframe,
+.modstack-modbot-shortcode iframe,
 .modstack-ticket-form-shortcode iframe {
     display: block;
     width: 100%;
@@ -149,12 +149,12 @@
 }
 
 /* Dark theme for shortcodes */
-.modstack-theme-dark .modstack-chatbot-shortcode,
+.modstack-theme-dark .modstack-modbot-shortcode,
 .modstack-theme-dark .modstack-ticket-form-shortcode {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.modstack-theme-dark .modstack-chatbot-shortcode iframe,
+.modstack-theme-dark .modstack-modbot-shortcode iframe,
 .modstack-theme-dark .modstack-ticket-form-shortcode iframe {
     background: #1f2937;
 }

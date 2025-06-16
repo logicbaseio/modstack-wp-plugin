@@ -5,12 +5,12 @@ A powerful WordPress plugin that integrates ModStack's AI-powered customer suppo
 ## Features
 
 - **AI Chat Widget**: Floating chat widget that can be displayed on any page
-- **Chatbot Shortcodes**: Embed specific chatbots using `[modstack-chatbot id="123"]`
+- **Modbot Shortcodes**: Embed specific modbots using `[modstack-chatbot id="123"]`
 - **Ticket Form Shortcodes**: Embed ticket submission forms using `[modstack-ticket-form id="456"]`
 - **Admin Dashboard**: Easy-to-use interface for managing API keys and configurations
 - **Multiple Themes**: Light and dark theme support
 - **Responsive Design**: Works perfectly on desktop and mobile devices
-- **WordPress Widgets**: Sidebar widgets for chatbots and ticket forms
+- **WordPress Widgets**: Sidebar widgets for modbots and ticket forms
 - **REST API Integration**: Secure communication with ModStack backend
 - **Webhook Support**: Real-time updates and notifications
 
@@ -52,7 +52,7 @@ A powerful WordPress plugin that integrates ModStack's AI-powered customer suppo
 ### 3. Enable Global Widget (Optional)
 
 1. Check **Enable Global Widget** to show a floating chat widget on all pages
-2. Select your default chatbot from the dropdown
+2. Select your default modbot from the dropdown
 3. Choose widget position (bottom-right, bottom-left, etc.)
 4. Select theme (light or dark)
 5. Save settings
@@ -61,13 +61,13 @@ A powerful WordPress plugin that integrates ModStack's AI-powered customer suppo
 
 ### Shortcodes
 
-#### Chatbot Shortcode
+#### Modbot Shortcode
 ```
 [modstack-chatbot id="your-chatbot-id"]
 ```
 
 **Attributes:**
-- `id` (required): Your chatbot ID from ModStack
+- `id` (required): Your modbot ID from ModStack
 - `theme`: `light` or `dark` (default: `light`)
 - `height`: Height in pixels (default: `500px`)
 
@@ -96,7 +96,7 @@ A powerful WordPress plugin that integrates ModStack's AI-powered customer suppo
 ```
 
 **Attributes:**
-- `chatbot-id`: Specific chatbot ID (uses default if not specified)
+- `modbot-id`: Specific modbot ID (uses default if not specified)
 - `theme`: `light` or `dark`
 - `position`: `bottom-right`, `bottom-left`, `top-right`, `top-left`
 - `title`: Widget title text
@@ -110,23 +110,23 @@ A powerful WordPress plugin that integrates ModStack's AI-powered customer suppo
 
 The plugin provides two WordPress widgets:
 
-1. **ModStack Chatbot Widget**: Add to sidebars to display a chatbot
+1. **ModStack Modbot Widget**: Add to sidebars to display a modbot
 2. **ModStack Ticket Form Widget**: Add to sidebars to display a ticket form
 
 To use widgets:
 1. Go to **Appearance > Widgets**
-2. Find "ModStack Chatbot" or "ModStack Ticket Form"
+2. Find "ModStack Modbot" or "ModStack Ticket Form"
 3. Drag to your desired widget area
 4. Configure the widget settings
 5. Save
 
 ### Managing Chatbots and Forms
 
-#### View Available Chatbots
-1. Go to **ModStack > Chatbots** in WordPress admin
-2. View all your available chatbots
+#### View Available Modbots
+1. Go to **ModStack > Modbots** in WordPress admin
+2. View all your available modbots
 3. Copy shortcodes directly from the interface
-4. Preview chatbots in a new window
+4. Preview modbots in a new window
 
 #### View Available Ticket Forms
 1. Go to **ModStack > Ticket Forms** in WordPress admin
@@ -161,7 +161,7 @@ You can customize the appearance by adding CSS to your theme:
 }
 
 /* Customize shortcode containers */
-.modstack-chatbot-shortcode {
+.modstack-modbot-shortcode {
     border: 2px solid #your-color;
 }
 ```
@@ -202,12 +202,12 @@ add_filter('modstack_widget_config', function($config) {
 
 #### Widget Not Appearing
 - Verify the global widget is enabled in settings
-- Check that a default chatbot is selected
+- Check that a default modbot is selected
 - Ensure there are no JavaScript errors in browser console
 - Check for theme conflicts
 
 #### Shortcodes Not Working
-- Verify the chatbot/form ID is correct
+- Verify the modbot/form ID is correct
 - Check that the API connection is working
 - Ensure shortcodes are properly formatted
 - Check for plugin conflicts

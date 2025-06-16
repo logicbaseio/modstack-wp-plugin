@@ -66,13 +66,13 @@ class ModStack_API {
     public function handle_chat_message($request) {
         $params = $request->get_json_params();
         
-        if (empty($params['message']) || empty($params['chatbot_id'])) {
-            return new WP_Error('missing_params', 'Message and chatbot_id are required', array('status' => 400));
+        if (empty($params['message']) || empty($params['modbot_id'])) {
+            return new WP_Error('missing_params', 'Message and modbot_id are required', array('status' => 400));
         }
         
         $response = $this->make_api_request('POST', '/api/v1/chat', array(
             'message' => sanitize_text_field($params['message']),
-            'chatbot_id' => sanitize_text_field($params['chatbot_id']),
+            'modbot_id' => sanitize_text_field($params['modbot_id']),
             'session_id' => sanitize_text_field($params['session_id'] ?? ''),
             'user_id' => sanitize_text_field($params['user_id'] ?? ''),
             'metadata' => array(
@@ -128,14 +128,14 @@ class ModStack_API {
      * Get widget configuration
      */
     public function get_widget_config($request) {
-        $chatbot_id = get_option('modstack_selected_chatbot', '');
+        $modbot_id = get_option('modstack_selected_modbot', '');
         
-        if (empty($chatbot_id)) {
-            return new WP_Error('no_chatbot', 'No chatbot configured', array('status' => 404));
+        if (empty($modbot_id)) {
+            return new WP_Error('no_modbot', 'No modbot configured', array('status' => 404));
         }
         
         $config = array(
-            'chatbot_id' => $chatbot_id,
+            'modbot_id' => $modbot_id,
             'api_url' => $this->api_url,
             'widget_enabled' => get_option('modstack_widget_enabled', false),
             'widget_position' => get_option('modstack_widget_position', 'bottom-right'),
@@ -263,10 +263,10 @@ class ModStack_API {
     }
     
     /**
-     * Get chatbots from API
+     * Get modbots from API
      */
-    public function get_chatbots() {
-        return $this->make_api_request('GET', '/api/v1/chatbots');
+    public function get_modbots() {
+        return $this->make_api_request('GET', '/api/v1/modbots');
     }
     
     /**
@@ -277,10 +277,10 @@ class ModStack_API {
     }
     
     /**
-     * Get specific chatbot
+     * Get specific modbot from API
      */
-    public function get_chatbot($chatbot_id) {
-        return $this->make_api_request('GET', '/api/v1/chatbots/' . $chatbot_id);
+    public function get_modbot($modbot_id) {
+        return $this->make_api_request('GET', '/api/v1/modbots/' . $modbot_id);
     }
     
     /**

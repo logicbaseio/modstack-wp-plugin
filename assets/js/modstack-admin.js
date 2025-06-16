@@ -74,8 +74,8 @@
             // Test connection
             $(document).on('click', '#test-connection', this.testConnection);
             
-            // Refresh chatbots
-            $(document).on('click', '#refresh-chatbots', this.refreshChatbots);
+            // Refresh modbots
+            $(document).on('click', '#refresh-modbots', this.refreshModbots);
             
             // Form validation
             $(document).on('submit', 'form', this.validateForm);
@@ -88,10 +88,10 @@
         },
         
         loadInitialData: function() {
-            // Load chatbots if API key exists
+            // Load modbots if API key exists
             const apiKey = $('#modstack_api_key').val();
             if (apiKey && utils.validateApiKey(apiKey)) {
-                this.loadChatbots();
+                this.loadModbots();
             }
         },
         
@@ -155,9 +155,9 @@
                         status.removeClass('error').addClass('success')
                               .text(config.strings.connection_success || 'Connection successful!');
                         
-                        // Auto-load chatbots on successful connection
+                        // Auto-load modbots on successful connection
                         setTimeout(() => {
-                            SettingsPage.loadChatbots();
+                            SettingsPage.loadModbots();
                         }, 1000);
                     } else {
                         status.removeClass('success').addClass('error')
@@ -181,14 +181,14 @@
             });
         },
         
-        refreshChatbots: function(e) {
+        refreshModbots: function(e) {
             e.preventDefault();
-            SettingsPage.loadChatbots();
+            SettingsPage.loadModbots();
         },
         
-        loadChatbots: function() {
-            const select = $('#modstack_selected_chatbot');
-            const button = $('#refresh-chatbots');
+        loadModbots: function() {
+            const select = $('#modstack_selected_modbot');
+            const button = $('#refresh-modbots');
             const currentValue = select.val();
             
             utils.showLoading(button);
@@ -197,19 +197,19 @@
                 url: config.ajaxUrl,
                 type: 'POST',
                 data: {
-                    action: 'modstack_get_chatbots',
+                    action: 'modstack_get_modbots',
                     nonce: config.nonce
                 },
                 success: function(response) {
                     if (response.success && response.data) {
-                        select.empty().append(`<option value="">${config.strings.select_chatbot || 'Select a chatbot'}</option>`);
+                        select.empty().append(`<option value="">${config.strings.select_modbot || 'Select a modbot'}</option>`);
                         
-                        $.each(response.data, function(index, chatbot) {
+                        $.each(response.data, function(index, modbot) {
                             const option = $('<option></option>')
-                                .attr('value', chatbot.id)
-                                .text(chatbot.name + (chatbot.status ? ` (${chatbot.status})` : ''));
+                                .attr('value', modbot.id)
+                                .text(modbot.name + (modbot.status ? ` (${modbot.status})` : ''));
                             
-                            if (chatbot.id === currentValue) {
+                            if (modbot.id === currentValue) {
                                 option.prop('selected', true);
                             }
                             
@@ -217,19 +217,19 @@
                         });
                         
                         utils.showNotice(
-                            config.strings.chatbots_loaded || `Loaded ${response.data.length} chatbots`,
+                            config.strings.modbots_loaded || `Loaded ${response.data.length} modbots`,
                             'success'
                         );
                     } else {
                         utils.showNotice(
-                            response.data || config.strings.failed_load_chatbots || 'Failed to load chatbots',
+                            response.data || config.strings.failed_load_modbots || 'Failed to load modbots',
                             'error'
                         );
                     }
                 },
                 error: function() {
                     utils.showNotice(
-                        config.strings.failed_load_chatbots || 'Failed to load chatbots',
+                        config.strings.failed_load_modbots || 'Failed to load modbots',
                         'error'
                     );
                 },
@@ -288,77 +288,77 @@
         }
     };
     
-    // Chatbots page functionality
-    const ChatbotsPage = {
+    // Modbots page functionality
+    const ModbotsPage = {
         init: function() {
+            this.loadModbots();
             this.bindEvents();
-            this.loadChatbots();
         },
         
         bindEvents: function() {
-            $(document).on('click', '.refresh-chatbots', this.refreshChatbots);
-            $(document).on('click', '.chatbot-preview', this.previewChatbot);
+            $(document).on('click', '.refresh-modbots', this.refreshModbots);
+            $(document).on('click', '.modbot-preview', this.previewModbot);
             $(document).on('click', '.copy-shortcode', this.copyShortcode);
         },
         
-        loadChatbots: function() {
-            const container = $('#chatbots-list');
+        loadModbots: function() {
+            const container = $('#modbots-list');
             
-            container.html('<div class="modstack-loading-container"><span class="modstack-loading"></span> Loading chatbots...</div>');
+            container.html('<div class="modstack-loading-container"><span class="modstack-loading"></span> Loading modbots...</div>');
             
             $.ajax({
                 url: config.ajaxUrl,
                 type: 'POST',
                 data: {
-                    action: 'modstack_get_chatbots',
+                    action: 'modstack_get_modbots',
                     nonce: config.nonce
                 },
                 success: function(response) {
                     if (response.success && response.data) {
-                        ChatbotsPage.renderChatbots(response.data);
+                        ModbotsPage.renderModbots(response.data);
                     } else {
-                        container.html(`<div class="notice notice-error"><p>${response.data || 'Failed to load chatbots'}</p></div>`);
+                        container.html(`<div class="notice notice-error"><p>${response.data || 'Failed to load modbots'}</p></div>`);
                     }
                 },
                 error: function() {
-                    container.html('<div class="notice notice-error"><p>Failed to load chatbots</p></div>');
+                    container.html('<div class="notice notice-error"><p>Failed to load modbots</p></div>');
                 }
             });
         },
         
-        renderChatbots: function(chatbots) {
-            const container = $('#chatbots-list');
+        renderModbots: function(modbots) {
+            const container = $('#modbots-list');
             
-            if (chatbots.length === 0) {
+            if (modbots.length === 0) {
                 container.html(`
                     <div class="notice notice-info">
-                        <p>No chatbots found. <a href="https://app.modstack.ai/chatbots" target="_blank">Create one in your ModStack dashboard</a>.</p>
+                        <p>No modbots found. <a href="https://app.modstack.ai/modbots" target="_blank">Create one in your ModStack dashboard</a>.</p>
                     </div>
                 `);
                 return;
             }
             
-            let html = '<div class="modstack-chatbots-grid">';
+            let html = '<div class="modstack-modbots-grid">';
             
-            chatbots.forEach(chatbot => {
+            modbots.forEach(modbot => {
                 html += `
-                    <div class="modstack-chatbot-card">
-                        <div class="chatbot-header">
-                            <h3>${chatbot.name}</h3>
-                            <span class="chatbot-status status-${chatbot.status || 'active'}">${chatbot.status || 'Active'}</span>
+                    <div class="modstack-modbot-card">
+                        <div class="modbot-header">
+                            <h3>${modbot.name}</h3>
+                            <span class="modbot-status status-${modbot.status || 'active'}">${modbot.status || 'Active'}</span>
                         </div>
-                        <div class="chatbot-content">
-                            <p class="chatbot-description">${chatbot.description || 'No description available'}</p>
-                            <div class="chatbot-meta">
-                                <span class="chatbot-id">ID: ${chatbot.id}</span>
-                                <span class="chatbot-created">Created: ${chatbot.created_at || 'Unknown'}</span>
+                        <div class="modbot-content">
+                            <p class="modbot-description">${modbot.description || 'No description available'}</p>
+                            <div class="modbot-meta">
+                                <span class="modbot-id">ID: ${modbot.id}</span>
+                                <span class="modbot-created">Created: ${modbot.created_at || 'Unknown'}</span>
                             </div>
                         </div>
-                        <div class="chatbot-actions">
-                            <button class="button button-secondary chatbot-preview" data-id="${chatbot.id}">
+                        <div class="modbot-actions">
+                            <button class="button button-secondary modbot-preview" data-id="${modbot.id}">
                                 Preview
                             </button>
-                            <button class="button button-primary copy-shortcode" data-shortcode="[modstack-chatbot id=&quot;${chatbot.id}&quot;]">
+                            <button class="button button-primary copy-shortcode" data-shortcode="[modstack-modbot id=&quot;${modbot.id}&quot;]">
                                 Copy Shortcode
                             </button>
                         </div>
@@ -370,16 +370,16 @@
             container.html(html);
         },
         
-        refreshChatbots: function(e) {
+        refreshModbots: function(e) {
             e.preventDefault();
-            ChatbotsPage.loadChatbots();
+            ModbotsPage.loadModbots();
         },
         
-        previewChatbot: function(e) {
+        previewModbot: function(e) {
             e.preventDefault();
             
-            const chatbotId = $(this).data('id');
-            const previewUrl = `https://app.modstack.ai/preview/chatbot/${chatbotId}`;
+            const modbotId = $(this).data('id');
+            const previewUrl = `https://app.modstack.ai/preview/modbot/${modbotId}`;
             
             window.open(previewUrl, '_blank', 'width=400,height=600,scrollbars=yes,resizable=yes');
         },
@@ -512,7 +512,7 @@
             window.open(previewUrl, '_blank', 'width=600,height=700,scrollbars=yes,resizable=yes');
         },
         
-        copyShortcode: ChatbotsPage.copyShortcode // Reuse the same function
+        copyShortcode: ModbotsPage.copyShortcode // Reuse the same function
     };
     
     // Initialize based on current page
@@ -521,8 +521,8 @@
         
         if (currentPage && currentPage.includes('modstack-settings')) {
             SettingsPage.init();
-        } else if (currentPage && currentPage.includes('modstack-chatbots')) {
-            ChatbotsPage.init();
+        } else if (currentPage && currentPage.includes('modstack-modbots')) {
+            ModbotsPage.init();
         } else if (currentPage && currentPage.includes('modstack-ticket-forms')) {
             TicketFormsPage.init();
         }
@@ -536,7 +536,7 @@
     // Export to global scope
     window.ModStackAdmin = {
         SettingsPage,
-        ChatbotsPage,
+        ModbotsPage,
         TicketFormsPage,
         utils
     };

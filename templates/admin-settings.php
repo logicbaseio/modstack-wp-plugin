@@ -84,17 +84,17 @@ if (!defined('ABSPATH')) {
                             
                             <tr>
                                 <th scope="row">
-                                    <label for="modstack_selected_chatbot"><?php _e('Default Chatbot', 'modstack-ai-support'); ?></label>
+                                    <label for="modstack_selected_chatbot"><?php _e('Default Modbot', 'modstack-ai-support'); ?></label>
                                 </th>
                                 <td>
                                     <select id="modstack_selected_chatbot" name="modstack_selected_chatbot" class="regular-text">
-                                        <option value=""><?php _e('Select a chatbot', 'modstack-ai-support'); ?></option>
+                                        <option value=""><?php _e('Select a modbot', 'modstack-ai-support'); ?></option>
                                     </select>
                                     <button type="button" id="refresh-chatbots" class="button button-secondary">
                                         <?php _e('Refresh', 'modstack-ai-support'); ?>
                                     </button>
                                     <p class="description">
-                                        <?php _e('Choose which chatbot to use for the global widget and default shortcodes.', 'modstack-ai-support'); ?>
+                                        <?php _e('Choose which modbot to use for the global widget and default shortcodes.', 'modstack-ai-support'); ?>
                                     </p>
                                 </td>
                             </tr>
@@ -153,7 +153,7 @@ if (!defined('ABSPATH')) {
                     <ol>
                         <li><?php _e('Get your API key from', 'modstack-ai-support'); ?> <a href="https://app.modstack.ai/settings/api" target="_blank">ModStack Dashboard</a></li>
                         <li><?php _e('Enter the API key above and test the connection', 'modstack-ai-support'); ?></li>
-                        <li><?php _e('Select a default chatbot for the global widget', 'modstack-ai-support'); ?></li>
+                        <li><?php _e('Select a default modbot for the global widget', 'modstack-ai-support'); ?></li>
                         <li><?php _e('Enable the global widget or use shortcodes in your content', 'modstack-ai-support'); ?></li>
                     </ol>
                 </div>
@@ -164,9 +164,9 @@ if (!defined('ABSPATH')) {
                     <h2 class="hndle"><?php _e('Shortcodes', 'modstack-ai-support'); ?></h2>
                 </div>
                 <div class="inside">
-                    <h4><?php _e('Chatbot', 'modstack-ai-support'); ?></h4>
+                    <h4><?php _e('Modbot', 'modstack-ai-support'); ?></h4>
                     <code>[modstack-chatbot id="123"]</code>
-                    <p class="description"><?php _e('Embed a specific chatbot', 'modstack-ai-support'); ?></p>
+                    <p class="description"><?php _e('Embed a specific modbot', 'modstack-ai-support'); ?></p>
                     
                     <h4><?php _e('Ticket Form', 'modstack-ai-support'); ?></h4>
                     <code>[modstack-ticket-form id="456"]</code>
