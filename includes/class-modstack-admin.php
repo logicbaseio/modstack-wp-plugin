@@ -153,6 +153,12 @@ if (strpos($api_key, 'modstack_') === 0) {
     if (!preg_match('/^modstack_wp_[a-f0-9]{64}$/', $api_key)) {
         wp_send_json_error(__('Invalid ModStack API key format.', 'modstack-ai-support'));
     } 
+} else {
+    // JWT format validation (should have 3 parts separated by dots)
+    $jwt_parts = explode('.', $api_key);
+    if (count($jwt_parts) !== 3) {
+        wp_send_json_error(__('Invalid API key format. Expected JWT token with 3 parts or ModStack format.', 'modstack-ai-support'));
+    }
 }
     
         $response = wp_remote_get($api_url . '/api/v1/modbots', array(
