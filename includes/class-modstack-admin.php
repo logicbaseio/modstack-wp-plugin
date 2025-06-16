@@ -153,10 +153,10 @@ class ModStack_Admin {
         }
     
         $response = wp_remote_get($api_url . '/test-connection', array(
-           'headers' => array(
-    'x-api-key' => $api_key,
-    'Content-Type' => 'application/json'
-),
+        'headers' => array(
+            'x-api-key' => $api_key,
+            'Content-Type' => 'application/json'
+        ),
 
             'timeout' => 30
         ));
@@ -207,10 +207,10 @@ class ModStack_Admin {
         }
         
         $response = wp_remote_get($api_url . '/modbots', array(
-           'headers' => array(
-    'x-api-key' => $api_key,
-    'Content-Type' => 'application/json'
-),
+        'headers' => array(
+            'x-api-key' => $api_key,
+            'Content-Type' => 'application/json'
+        ),
 
             'timeout' => 30
         ));
@@ -244,10 +244,10 @@ class ModStack_Admin {
         }
         
         $response = wp_remote_get($api_url . '/ticket-forms', array(
-            'headers' => array(
-    'x-api-key' => $api_key,
-    'Content-Type' => 'application/json'
-),
+        'headers' => array(
+            'x-api-key' => $api_key,
+            'Content-Type' => 'application/json'
+        ),
 
             'timeout' => 30
         ));
