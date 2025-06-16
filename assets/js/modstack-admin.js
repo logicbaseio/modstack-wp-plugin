@@ -160,8 +160,20 @@
                             SettingsPage.loadModbots();
                         }, 1000);
                     } else {
-                        status.removeClass('success').addClass('error')
-                              .text(response.data || config.strings.connection_failed || 'Connection failed');
+                        let errorMessage = config.strings.connection_failed || 'Connection failed';
+                        
+                        if (response.data) {
+                            if (typeof response.data === 'string') {
+                                errorMessage = response.data;
+                            } else if (response.data.message) {
+                                errorMessage = response.data.message;
+                                if (response.data.debug) {
+                                    console.log('ModStack API Debug Info:', response.data.debug);
+                                }
+                            }
+                        }
+                        
+                        status.removeClass('success').addClass('error').text(errorMessage);
                     }
                 },
                 error: function(xhr, status, error) {
