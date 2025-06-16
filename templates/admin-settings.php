@@ -291,8 +291,20 @@ jQuery(document).ready(function($) {
                           .text('<?php echo esc_js(__('Connection successful!', 'modstack-ai-support')); ?>');
                     loadChatbots();
                 } else {
-                    status.removeClass('success').addClass('error')
-                          .text(response.data || '<?php echo esc_js(__('Connection failed', 'modstack-ai-support')); ?>');
+                    let errorMessage = '<?php echo esc_js(__('Connection failed', 'modstack-ai-support')); ?>';
+                    
+                    if (response.data) {
+                        if (typeof response.data === 'string') {
+                            errorMessage = response.data;
+                        } else if (response.data.message) {
+                            errorMessage = response.data.message;
+                            if (response.data.debug) {
+                                console.log('ModStack API Debug Info:', response.data.debug);
+                            }
+                        }
+                    }
+                    
+                    status.removeClass('success').addClass('error').text(errorMessage);
                 }
             },
             error: function() {
