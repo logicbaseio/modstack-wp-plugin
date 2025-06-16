@@ -1,0 +1,32 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00FFD1;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00E5B8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7ED321;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="128" height="128" fill="#1A2B1A" rx="16"/>
+  
+  <!-- Main letter 'd' shape -->
+  <path d="M30 37.5 L30 90.5 L50 90.5 C70 90.5 85 75.5 85 55.5 C85 35.5 70 20.5 50 20.5 L30 20.5 L30 37.5 Z" fill="url(#gradient)" stroke="none"/>
+  
+  <!-- Vertical line for 'd' -->
+  <rect x="85" y="20.5" width="13" height="70" fill="url(#gradient)"/>
+  
+  <!-- Inner circle/oval for the 'd' -->
+  <ellipse cx="64" cy="55.5" rx="17.5" ry="17.5" fill="#1A2B1A"/>
+  
+  <!-- Two sparkle/star elements inside -->
+  <g transform="translate(64,55.5)">
+    <!-- Left sparkle -->
+    <path d="M-7.5 -4 L-4 -7.5 L-0.5 -4 L-4 -0.5 Z" fill="url(#gradient)"/>
+    <path d="M-7.5 4 L-4 0.5 L-0.5 4 L-4 7.5 Z" fill="url(#gradient)"/>
+    
+    <!-- Right sparkle -->
+    <path d="M0.5 -4 L4 -7.5 L7.5 -4 L4 -0.5 Z" fill="url(#gradient)"/>
+    <path d="M0.5 4 L4 0.5 L7.5 4 L4 7.5 Z" fill="url(#gradient)"/>
+  </g>
+</svg>

@@ -1,0 +1,63 @@
+<svg width="772" height="250" viewBox="0 0 772 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A2B1A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0F1B0F;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00FFD1;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00E5B8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7ED321;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="772" height="250" fill="url(#bgGradient)"/>
+  
+  <!-- Logo container -->
+  <g transform="translate(50, 50)">
+    <!-- Main 'd' shape -->
+    <path d="M0 15 L0 135 L35 135 C70 135 95 110 95 75 C95 40 70 15 35 15 L0 15 Z" fill="url(#logoGradient)" stroke="none"/>
+    
+    <!-- Vertical line for 'd' -->
+    <rect x="95" y="15" width="18" height="120" fill="url(#logoGradient)"/>
+    
+    <!-- Inner circle/oval for the 'd' -->
+    <ellipse cx="67" cy="75" rx="28" ry="28" fill="#1A2B1A"/>
+    
+    <!-- Two sparkle/star elements inside -->
+    <g transform="translate(67,75)">
+      <!-- Left sparkle -->
+      <path d="M-12 -7 L-7 -12 L-2 -7 L-7 -2 Z" fill="url(#logoGradient)"/>
+      <path d="M-12 7 L-7 2 L-2 7 L-7 12 Z" fill="url(#logoGradient)"/>
+      
+      <!-- Right sparkle -->
+      <path d="M2 -7 L7 -12 L12 -7 L7 -2 Z" fill="url(#logoGradient)"/>
+      <path d="M2 7 L7 2 L12 7 L7 12 Z" fill="url(#logoGradient)"/>
+    </g>
+  </g>
+  
+  <!-- Plugin Title -->
+  <text x="200" y="90" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="url(#logoGradient)">ModStack AI Support</text>
+  
+  <!-- Subtitle -->
+  <text x="200" y="120" font-family="Arial, sans-serif" font-size="16" fill="#FFFFFF" opacity="0.9">WordPress Plugin</text>
+  
+  <!-- Description -->
+  <text x="200" y="145" font-family="Arial, sans-serif" font-size="12" fill="#FFFFFF" opacity="0.7">AI-powered customer support with chatbots and ticket forms</text>
+  
+  <!-- Features list -->
+  <g transform="translate(200, 170)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="11" fill="#00FFD1">✓ Chat Widget</text>
+    <text x="100" y="0" font-family="Arial, sans-serif" font-size="11" fill="#00FFD1">✓ Shortcodes</text>
+    <text x="200" y="0" font-family="Arial, sans-serif" font-size="11" fill="#00FFD1">✓ API Integration</text>
+    <text x="320" y="0" font-family="Arial, sans-serif" font-size="11" fill="#00FFD1">✓ Admin Panel</text>
+  </g>
+  
+  <!-- Decorative elements -->
+  <circle cx="650" cy="50" r="2" fill="#00FFD1" opacity="0.6"/>
+  <circle cx="680" cy="80" r="1.5" fill="#7ED321" opacity="0.4"/>
+  <circle cx="710" cy="110" r="2.5" fill="#00E5B8" opacity="0.5"/>
+  <circle cx="670" cy="140" r="1" fill="#00FFD1" opacity="0.3"/>
+  <circle cx="700" cy="170" r="2" fill="#7ED321" opacity="0.6"/>
+</svg>
