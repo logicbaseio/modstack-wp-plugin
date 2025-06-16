@@ -86,7 +86,7 @@ class ModStack_Admin {
         }
         
         $api_key = get_option('modstack_api_key', '');
-        $api_url = get_option('modstack_api_url', 'https://api.modstack.ai');
+        $api_url = get_option('modstack_api_url', 'https://azrjkdwesrnarpuipbml.supabase.co/functions/v1/wordpress-api');
         $widget_enabled = get_option('modstack_widget_enabled', false);
         $widget_position = get_option('modstack_widget_position', 'bottom-right');
         $selected_modbot = get_option('modstack_selected_modbot', '');
@@ -147,13 +147,12 @@ class ModStack_Admin {
             wp_send_json_error(__('API key and URL are required', 'modstack-ai-support'));
         }
         
-
-// Validate API key format - accept only ModStack custom format
+        // Validate API key format - accept only ModStack custom format
         if (!preg_match('/^modstack_wp_[a-f0-9]{64}$/', $api_key)) {
             wp_send_json_error(__('Invalid ModStack API key format. Expected format: modstack_wp_[64-character hash]', 'modstack-ai-support'));
         }
     
-        $response = wp_remote_get($api_url . '/api/v1/modbots', array(
+        $response = wp_remote_get($api_url . '/test-connection', array(
             'headers' => array(
                 'Authorization' => 'Bearer ' . $api_key,
                 'Content-Type' => 'application/json'
@@ -182,7 +181,7 @@ class ModStack_Admin {
             $debug_info = array(
                 'status_code' => $status_code,
                 'response_body' => $body,
-                'api_url' => $api_url . '/api/v1/modbots',
+                'api_url' => $api_url . '/test-connection',
                 'api_key_length' => strlen($api_key)
             );
             
@@ -200,13 +199,13 @@ class ModStack_Admin {
         check_ajax_referer('modstack_nonce', 'nonce');
         
         $api_key = get_option('modstack_api_key', '');
-        $api_url = get_option('modstack_api_url', 'https://api.modstack.ai');
+        $api_url = get_option('modstack_api_url', 'https://azrjkdwesrnarpuipbml.supabase.co/functions/v1/wordpress-api');
         
         if (empty($api_key)) {
             wp_send_json_error(__('API key not configured', 'modstack-ai-support'));
         }
         
-        $response = wp_remote_get($api_url . '/api/v1/modbots', array(
+        $response = wp_remote_get($api_url . '/modbots', array(
             'headers' => array(
                 'Authorization' => 'Bearer ' . $api_key,
                 'Content-Type' => 'application/json'
@@ -242,7 +241,7 @@ class ModStack_Admin {
             wp_send_json_error(__('API key not configured', 'modstack-ai-support'));
         }
         
-        $response = wp_remote_get($api_url . '/api/v1/ticket-forms', array(
+        $response = wp_remote_get($api_url . '/ticket-forms', array(
             'headers' => array(
                 'Authorization' => 'Bearer ' . $api_key,
                 'Content-Type' => 'application/json'
