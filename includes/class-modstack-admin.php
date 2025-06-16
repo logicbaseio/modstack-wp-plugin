@@ -147,7 +147,7 @@ class ModStack_Admin {
             wp_send_json_error(__('API key and URL are required', 'modstack-ai-support'));
         }
         
-        $response = wp_remote_get($api_url . '/api/v1/auth/verify', array(
+        $response = wp_remote_get($api_url . '/api/v1/modbots', array(
             'headers' => array(
                 'Authorization' => 'Bearer ' . $api_key,
                 'Content-Type' => 'application/json'
@@ -166,10 +166,12 @@ class ModStack_Admin {
             $data = json_decode($body, true);
             wp_send_json_success(array(
                 'message' => __('Connection successful!', 'modstack-ai-support'),
-                'user' => $data['user'] ?? null
+                'data' => $data
             ));
         } else {
-            wp_send_json_error(__('Authentication failed. Please check your API key.', 'modstack-ai-support'));
+            $error_data = json_decode($body, true);
+            $error_message = $error_data['message'] ?? 'Authentication failed. Please check your API key.';
+            wp_send_json_error(__($error_message, 'modstack-ai-support'));
         }
     }
     
