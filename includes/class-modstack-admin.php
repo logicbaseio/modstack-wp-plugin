@@ -236,7 +236,7 @@ class ModStack_Admin {
         check_ajax_referer('modstack_nonce', 'nonce');
         
         $api_key = get_option('modstack_api_key', '');
-        $api_url = get_option('modstack_api_url', 'https://api.modstack.ai');
+        $api_url = get_option('modstack_api_url', 'https://azrjkdwesrnarpuipbml.supabase.co/functions/v1/wordpress-api');
         
         if (empty($api_key)) {
             wp_send_json_error(__('API key not configured', 'modstack-ai-support'));
